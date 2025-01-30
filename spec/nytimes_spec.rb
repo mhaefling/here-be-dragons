@@ -15,22 +15,24 @@ class Nytimes
       expect(result).to eq("OK")
     end
 
-    xit 'can get copyright' do 
-      #Using @hash, define a variable called `result` that returns the copyright
+    it 'can get copyright' do 
+      result = @hash[:copyright]
 
       expect(result).to eq("Copyright (c) 2018 The New York Times Company. All Rights Reserved.")
     end
 
-    xit 'can get array of stories' do 
-      #Using @hash, define a variable called `result` that returns the array of stories
+    it 'can get array of stories' do
+      result = @hash[:results]
   
       expect(result).to be_an_instance_of(Array)
       expect(result.count).to eq(44)
     end
 
-    xit 'can get all stories with subsection of politics' do 
-      #Using @hash, define a variable called `result` that returns all stories with subsection of politics.
-  
+    it 'can get all stories with subsection of politics' do 
+      result = @hash[:results].select do |story|
+        story[:subsection] == "Politics"
+      end
+        
       expect(result).to be_an_instance_of(Array)
       expect(result.count).to eq(6)
       expect(result.first[:title]).to eq("Congressional G.O.P. Agenda Quietly Falls Into Place Even as Trump Steals the Spotlight")
